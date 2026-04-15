@@ -99,15 +99,15 @@ def load_songs(csv_path: str) -> List[Dict]:
     return songs
 
 
- """Compute a similarity score and explanation for a song given user preferences."""   
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
+    """Compute a similarity score and explanation for a song given user preferences."""
     score = 0.0
     reasons = []
 
     # Genre match
     if user_prefs["genre"] == song["genre"]:
-        score += 2.0
-        reasons.append("genre match (+2.0)")
+        score += 1.0
+        reasons.append("genre match (+1.0)")
 
     # Mood match
     if user_prefs["mood"] == song["mood"]:
@@ -115,8 +115,8 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
         reasons.append("mood match (+1.5)")
 
     # Energy similarity
-    energy_diff = abs(song["energy"] - user_prefs["energy"])
-    energy_score = max(0, 1 - energy_diff)
+    energy_score = max(0, 1 - abs(song["energy"] - user_prefs["energy"]))
+    score += energy_score * 2
 
     score += energy_score
     reasons.append(f"energy similarity (+{energy_score:.2f})")
