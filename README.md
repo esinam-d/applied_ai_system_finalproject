@@ -18,14 +18,44 @@ Replace this paragraph with your own summary of what your version does.
 ## How The System Works
 
 Explain your design in plain language.
+The recommender system assigns a score to each song based on how closely it matches the user’s preferences. Each song is evaluated using a combination of categorical features (genre, mood) and numerical features (energy, tempo, danceability, valence, and acousticness).
+
+A matching genre is given higher importance than most other features, followed by mood, since these strongly define musical style and feeling.
+
+For numerical features, the system calculates similarity based on distance — songs that are closer to the user’s preferred values receive higher scores, while songs that are further away receive lower scores.
+
+Each feature contributes to a final weighted score. The system then ranks all songs from highest to lowest score and recommends the top results.
+
+Algorithm Recipe:
+
 
 Some prompts to answer:
-
 - What features does each `Song` use in your system
   - For example: genre, mood, energy, tempo
+Ans.) Genre
+      Energy
+      Danceability
+      Tempo
+      Valence
+      Mood
+
 - What information does your `UserProfile` store
+Ans.) preferred_genre
+      preferred_mood
+      target_tempo 
+      target_valence
+      target_energy
+      target_danceability
+
 - How does your `Recommender` compute a score for each song
+Ans.) My system uses a content-based scoring approach. 
+Each song is compared to a user's profile using features like genre, energy, danceability, tempo, valenc and mood.
+Numeric features are compared using distance-based similarity, while categorical features are matched directly.
+Every feature is assigned a weight based on how strongly it represents the musical "vibe" or "aura".
+
 - How do you choose which songs to recommend
+Ans.) After computing the score for each song, the system ranks all songs in descending order or scores.
+The highest-scoring songs are recommended first, followed my the lower ones in order.
 
 You can include a simple diagram or bullet list if helpful.
 
