@@ -10,6 +10,7 @@ You will implement the functions in recommender.py:
 """
 
 from src.recommender import load_songs, recommend_songs
+from src.reliability import test_reliability
 
 profiles = [
     {
@@ -35,6 +36,9 @@ def main() -> None:
     songs = load_songs("data/songs.csv")
     print("Loaded songs:", len(songs))
 
+    # -------------------------
+    # RECOMMENDATIONS PHASE
+    # -------------------------
     for profile in profiles:
         print("\n=== " + profile["name"] + " ===\n")
 
@@ -43,6 +47,18 @@ def main() -> None:
         for song, score, explanation in recommendations:
             print(f"{song['title']} - Score: {score:.2f}")
             print(f"Because: {explanation}\n")
-            
+
+    # -------------------------
+    # RELIABILITY PHASE
+    # -------------------------
+    print("\n=== AI RELIABILITY EVALUATION PHASE ===\n")
+
+    for profile in profiles:
+        result = test_reliability(profile, songs, runs=3)
+
+        print(f"{result['profile']}")
+        print(f"Stability Score: {result['stability_score']:.2f}\n")
+
+
 if __name__ == "__main__":
     main()

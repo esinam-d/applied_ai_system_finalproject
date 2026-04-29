@@ -240,3 +240,11 @@ A few sentences about what you learned:
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
 
+
+## APPLIED AI EXTENSION OF MUSIC RECOMMENDER SIMULATION
+
+## 1. Original project: 🎵 Music Recommender Simulation
+
+This project is an extension of my Music Recommender Simulation (module 3 starter project). The original system was a simple rule-based recommender that suggested songs based on genre, mood, and energy similaritiy using a scoring function.
+
+Its main goal was to determine how basic recommendation systems work by ranking songs based on use preferences. It produced top-k song recommendations with simple explanations for why each song was chosen.
