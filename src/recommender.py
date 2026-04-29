@@ -30,6 +30,7 @@ class UserProfile:
     target_energy: float
     likes_acoustic: bool
 
+
 class Recommender:
     """
     OOP implementation of the recommendation logic.
@@ -61,6 +62,7 @@ class Recommender:
         scored_songs.sort(key=lambda x: x[1], reverse=True)
         return [song for song, score, reasons in scored_songs[:k]]
 
+# Explanation method to provide reasons for a recommendation.
     def explain_recommendation(self, user: UserProfile, song: Song) -> str:
         # Convert UserProfile to dict format for scoring
         user_prefs = {
@@ -78,7 +80,8 @@ class Recommender:
         
         score, reasons = score_song(user_prefs, song_dict)
         return ", ".join(reasons)
-
+    
+ # Functional implementation of the recommendation logic.
 def load_songs(csv_path: str) -> List[Dict]:
     """
     Loads songs from a CSV file.
@@ -97,8 +100,8 @@ def load_songs(csv_path: str) -> List[Dict]:
             row['acousticness'] = float(row['acousticness'])
             songs.append(row)
     return songs
-
-
+    
+# Scoring function to compute similarity between user preferences and song attributes.
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     """Compute a similarity score and explanation for a song given user preferences."""
     score = 0.0

@@ -1,5 +1,6 @@
 from src.recommender import recommend_songs
 
+# Reliability test to check consistency of recommendations across multiple runs.
 def compute_overlap(list_a, list_b):
     """Measures how similar two recommendation lists are."""
 
@@ -11,7 +12,7 @@ def compute_overlap(list_a, list_b):
 
     return len(set_a.intersection(set_b)) / len(set_a)
 
-
+# Reliability test to check consistency of recommendations across multiple runs.
 def test_reliability(profile, songs, runs=3, k=5):
     """Runs recommender multiple times and checks consistency."""
 

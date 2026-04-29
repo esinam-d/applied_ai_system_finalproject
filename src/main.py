@@ -51,6 +51,7 @@ def main() -> None:
     # -------------------------
     # RELIABILITY PHASE
     # -------------------------
+    # This phase checks how consistent the recommendations are across multiple runs for the same profile.
     print("\n=== AI RELIABILITY EVALUATION PHASE ===\n")
 
     for profile in profiles:
