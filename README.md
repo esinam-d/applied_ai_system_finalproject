@@ -2,22 +2,10 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
-
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
 
 ---
 
 ## How The System Works
-
-Explain your design in plain language.
 The recommender system assigns a score to each song based on how closely it matches the user’s preferences. Each song is evaluated using a combination of categorical features (genre, mood) and numerical features (energy, tempo, danceability, valence, and acousticness).
 
 A matching genre is given higher importance than most other features, followed by mood, since these strongly define musical style and feeling.
@@ -248,3 +236,154 @@ A few sentences about what you learned:
 This project is an extension of my Music Recommender Simulation (module 3 starter project). The original system was a simple rule-based recommender that suggested songs based on genre, mood, and energy similaritiy using a scoring function.
 
 Its main goal was to determine how basic recommendation systems work by ranking songs based on use preferences. It produced top-k song recommendations with simple explanations for why each song was chosen.
+
+## Title and Summary
+
+Project Name: SongPulse Engine (Applied AI Extension)
+
+This project is an AI-powered music recommendation system that suggests songs based on user preferences such as genre, mood, and energy level. It matters because it demonstrates how simple AI scoring systems can simulate personalized recommendations similar to real-world platforms like Spotify.
+
+The system was extended to include evaluation and reliability testing to ensure more consistent and meaningful recommendations.
+
+The system works in a pipeline:
+- User inputs preferences (genre, mood, energy)
+- The recommender engine scores each song using similarity rules
+- Songs are ranked and the top results are selected
+- A reliability layer tests results across multiple user profiles
+- A human review step checks for bias, consistency, and correctness
+
+## Architecture Overview
+1. Data Layer
+	•	songs.csv contains structured song features (genre, mood, energy, tempo, etc.)
+
+2. Recommendation Engine
+	•	score_song() computes similarity between user preferences and song attributes
+	•	recommend_songs() ranks all songs and returns top-k results with explanations
+
+3. Reliability Evaluation Layer
+	•	test_reliability() runs the recommender multiple times across different user profiles
+	•	compute_overlap() measures consistency between outputs
+	•	Outputs a stability score representing system reliability
+
+The architecture ensures that recommendations are not only generated but also evaluated for reliability and fairness.
+
+## Setup Instructions
+1. Clone the repository:
+git clone https://github.com/esinam-d/applied_ai_system_finalproject.git
+cd applied-ai-system-final
+
+2. Install Requirements
+pip install -r requirements.txt
+
+3. Run the system
+python3 -m src.main
+
+##  Sample Interactions
+Example 1: High Energy User
+Input:
+	Genre: rock
+	Mood: calm
+	Energy: 0.95
+
+Output:
+	Storm Runner — Score: 3.88
+	Thunder Run — Score: 3.79
+	Neon Drive — Score: 2.97
+
+
+Example 2: Genre Mismatch User
+Input:
+	Genre: classical
+	Mood: happy
+	Energy: 0.7
+
+Output:
+	Midnight Bloom — Score: 4.44
+	Rooftop Lights — Score: 4.32
+	Sunrise City — Score: 4.14
+
+Example 3: Reliability Output
+
+Input Profile: balanced_profile
+
+Output:
+	Stability Score: 1.00
+	- Interpretation: The system produces identical recommendations across runs, indicating deterministic and stable behavior.
+
+## Design Decisions & Trade-off
+The system was designed as a feature-based music recommender using structured audio attributes such as energy, tempo, valence, mood, and genre. This approach was chosen because it is interpretable, lightweight, and does not require a large machine learning model or training dataset.
+
+A weighted scoring system was implemented to combine multiple similarity signals (e.g., energy similarity and genre matching) into a single ranking score. This made the recommendation logic transparent and easy to debug, allowing each recommendation to be explained in human-readable terms.
+
+A key design decision was to prioritize interpretability over model complexity
+
+The trade-off is that while the system is stable and easy to understand, it is less adaptive than modern recommender systems. It does not learn from user behavior over time and relies entirely on predefined feature weights.
+
+## Testing Summary
+What worked well:
+	•	Consistent ranking outputs across repeated runs
+	•	Clear and interpretable scoring explanations
+	•	Reliable separation of user preference profiles
+
+What did not work initially:
+	•	Early mismatch between tuple-based outputs and dictionary-based evaluation caused runtime errors in reliability testing
+	•	The overlap function initially failed due to incorrect data structure handling
+
+What was learned:
+	•	AI pipelines must maintain consistent data formats across modules
+	•	Evaluation systems are essential for validating recommendation stability
+	•	Even simple AI systems require careful testing of output structure consistency
+
+
+## Reflection
+This project demonstrated how AI systems can be built using deterministic logic instead of machine learning models. It highlighted the importance of structuring data pipelines correctly and ensuring compatibility between system components.
+
+A key insight was that “intelligence” in AI systems is not only about prediction quality, but also about consistency, interpretability, and reliability. Implementing the reliability testing layer helped reinforce the idea that AI systems must be evaluated, not just built.
+
+This project improved my understanding of system design, debugging multi-component architectures, and evaluating AI behavior in a structured and measurable way.
+
+
+ The AI system was evaluated using an automated reliability testing method that measures how consistent recommendations are across repeated runs of the same user profile.
+
+Each profile was tested over 3 runs, and the similarity between recommendation lists was calculated using an overlap-based stability score.
+
+Results:
+	- 4 out of 4 profiles produced perfectly consistent recommendations across runs
+	- Average stability score: 1.00
+	- No inconsistencies or ranking variation were observed after fixing data structure issues in the evaluation module
+
+
+## Test Harness / Evaluation Script (Extra Credit)
+
+The system includes an automated evaluation script that runs the recommender on multiple predefined user profiles and measures output consistency across repeated executions.
+
+Each profile is tested multiple times (runs=3), and a stability score is computed using overlap between recommendation lists. The script outputs a summary of reliability per profile, allowing systematic evaluation of model consistency.
+
+
+## AI Collaboration
+One helpful AI suggestion was the idea of adding a reliability testing layer that measures consistency using repeated runs and an overlap-based similarity score. This significantly improved the project by adding an evaluation component that goes beyond simple recommendation generation.
+
+However, not all AI suggestions were correct or immediately usable. For example, earlier suggestions assumed incorrect data structures in my recommendation output (treating tuples as dictionaries), which caused runtime errors. I had to debug and adjust the implementation to correctly access nested tuple values.
+
+This project also highlighted system limitations. The recommender is fully deterministic and does not learn from user behavior or adapt over time. As a result, while it is highly consistent, it lacks personalization improvements over repeated use. In the future, I would improve the system by adding user feedback learning, introducing randomness for diversity in recommendations, and incorporating a more advanced ranking model
+
+This project demonstrates my ability to design and build a complete AI system from data processing to evaluation. I learned how to structure a recommendation pipeline, debug multi-file Python systems, and implement reliability testing to evaluate AI consistency. It shows that I understand not only how to build AI systems, but also how to measure and validate their behavior, which is essential for real-world AI engineering.
+
+
+
+
+## 🎥 Loom Video Walkthrough
+
+Here is the required system demonstration video:
+
+🔗 https://www.loom.com/share/0618891e3672460888c98daa25674e13
+
+This video shows:
+- End-to-end system execution
+- Multiple user profile inputs
+- Recommendation outputs
+- Reliability evaluation results
+
+## 🏗️ System Architecture
+
+![Architecture Diagram](assets/architecture.png)
